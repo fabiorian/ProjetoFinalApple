@@ -8,25 +8,34 @@
 import SwiftUI
 import MapKit
 
-let fortaleza = CLLocation(latitude: -20000 , longitude: 8.53994  )
 
-var mapView: MKMapView!
+let fortaleza = CLLocation(latitude: -3.71722 , longitude: -38.54333)
 
 struct mapOnView: View {
     @Environment(\.dismiss) var dismiss
-    @State private var showingMap = false
+    @State private var showingType = false
+    @State private var selectedMapType: MKMapType = .standard
 
     var body: some View {
-        MapViewController()
-            .edgesIgnoringSafeArea(.all)
-//        Button("Casas de doação") {
-//            showingMap = true
-//        }
-//        .sheet(isPresented: $showingMap){
-//            cdView()
-//        }
-//        let fortalezaCoord2D = CLLocationCoordinate2D(latitude:-3.77165 , longitude: -38.53994)
+        ZStack(alignment: .bottomTrailing) {
+            MapViewController(mapType: $selectedMapType)
+                .edgesIgnoringSafeArea(.all)
 
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Picker("Tipo de Mapa", selection: $selectedMapType) {
+                        Text("Padrão").tag(MKMapType.standard)
+                        Text("Híbrido").tag(MKMapType.hybrid)
+                    }
+                    .pickerStyle(.menu)
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(8)
+                    .padding()
+                }
+            }
+        }
     }
 }
 

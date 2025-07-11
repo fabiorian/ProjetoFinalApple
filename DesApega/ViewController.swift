@@ -13,6 +13,13 @@ import SwiftUI
 class ViewController: UIViewController, MKMapViewDelegate {
 
     var mapView: MKMapView!
+    var mapType: MKMapType = .standard{
+        didSet {
+            if mapView != nil {
+                mapView.mapType = mapType
+                }
+            }
+        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +28,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self
         view.addSubview(mapView)
+        mapView.mapType = mapType
+        mapView.pointOfInterestFilter = .excludingAll
 
         let initialLocation = CLLocation(latitude: -3.71722, longitude: -38.54333)
         let regionRadius: CLLocationDistance = 11000
@@ -43,12 +52,16 @@ class ViewController: UIViewController, MKMapViewDelegate {
 
     }
 }
-
 struct MapViewController: UIViewControllerRepresentable {
+    @Binding var mapType: MKMapType
+
     func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
+        let vc = ViewController()
+        vc.mapType = mapType
+        return vc
     }
 
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+        uiViewController.mapType = mapType
     }
 }
