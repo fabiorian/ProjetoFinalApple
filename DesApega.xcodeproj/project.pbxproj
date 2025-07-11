@@ -10,9 +10,22 @@
 		2227BB942E18671600EDA347 /* DesApega.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesApega.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CE5F6CDD2E21928B00EF2A88 /* Exceptions for "DesApega" folder in "DesApega" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Donation.swift,
+			);
+			target = 2227BB932E18671600EDA347 /* DesApega */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2227BB962E18671600EDA347 /* DesApega */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CE5F6CDD2E21928B00EF2A88 /* Exceptions for "DesApega" folder in "DesApega" target */,
+			);
 			path = DesApega;
 			sourceTree = "<group>";
 		};
