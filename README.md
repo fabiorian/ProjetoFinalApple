@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <h1>📁 App DesApega </h1>
-    <p>Este repositório contém o projeto final da Equipe 6 - Calabresinhos, da disciplina Apple Development.</p>
+    <p>Este repositório contém o projeto final da Equipe 6 - Calabresinhos.</p>
     <h2>Funcionalidades:</h2>
     <ul>
       <li>Mapa interativo, mostrando as Casas de Doações</li>
