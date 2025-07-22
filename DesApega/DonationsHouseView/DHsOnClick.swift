@@ -13,11 +13,20 @@ struct DHsOnClick: View {
 
 
     var body: some View {
+
         VStack(spacing: 12) {
-            Capsule()
-                .frame(width: 40, height: 5)
-                .foregroundColor(.gray.opacity(0.3))
-                .padding(.top, 8)
+//            Capsule()
+//                .frame(width: 40, height: 5)
+//                .foregroundColor(.gray.opacity(0.3))
+//                .padding(.top, 8)
+            Image(house.imageName ?? "placemaker")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                   .scaledToFill()
+                   .frame(height: .infinity)
+                   .clipped()
+                   .cornerRadius(12)
+                   .padding(.horizontal)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(house.name)
@@ -61,13 +70,13 @@ struct DHsOnClick: View {
                 endereco = result ?? "Endereço não disponível"
             }
         }
-        .padding(.bottom, 16)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(.systemBackground))
-                .shadow(radius: 10)
-        )
-        .frame(maxWidth: .infinity)
+        .padding(.bottom, 200)
+//        .background(
+//            RoundedRectangle(cornerRadius: 10)
+//                .fill(Color(.systemBackground))
+//                .shadow(radius: 10)
+//        )
+        .frame(maxWidth: .greatestFiniteMagnitude)
     }
 }
 
@@ -81,5 +90,6 @@ func iconForCategory(_ category: Category) -> String {
 }
 
 #Preview {
-    DHsOnClick(house: DonationsHouse(name: "NOME", category: .clothe, description: "apifoioaf", latitude: -3.90469232, longitude: -38.323526))
+    DHsOnClick(house: DonationsHouse(name: "Nome", category: .clothe, description: "a[oigfhjweoifhjweoihjwojheoi2hjeoif", latitude: -3.895542, longitude: -38.70283,imageName: "dhs1"))
 }
+

@@ -16,19 +16,11 @@ struct mapOnView: View {
     @State private var showingType = false
     @State private var selectedMapType: MKMapType = .standard
     @State var field = ""
-    @State private var donationHouse = [
-        DonationsHouse(name: "Casa A", category: .clothe, description: "Roupas usadas", latitude: -3.715, longitude: -38.543),
-        DonationsHouse(name: "Casa B", category: .toy, description: "Brinquedos diversos", latitude: -3.72, longitude: -38.55)
-    ]
-
 
     var body: some View {
 
-
-
-        Spacer()
         ZStack(alignment: .bottomTrailing) {
-            MapViewController(mapType: $selectedMapType, donationHouse: donationHouse)
+            MapViewController(mapType: $selectedMapType, donationHouse: DHsList)
                 .edgesIgnoringSafeArea(.all)
 
             VStack {

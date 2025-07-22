@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
+let DHsList: [DonationsHouse] = donationHouses()
 
 struct ListDHsView: View {
-    let DHsList: [DonationsHouse] = donationHouses()
     var body: some View {
         NavigationStack{
             List {
                 Section(header: Text("Casas de Doação"), footer: Text("OI")){
                     ForEach(DHsList) { DH in
-//                        NavigationLink(destination: DHsView){
+                        NavigationLink(destination: DHsOnClick(house: DH)){
                             DHsView(DHs: DH)
-//                        }
+                        }
                     }
                 }
             }
