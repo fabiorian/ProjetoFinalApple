@@ -25,6 +25,7 @@ enum Category: String, Codable {
     case clothe = "Roupa"
     case footwear = "Calçado"
     case eletronic = "Eletrônico"
+    case toy = "Brinquedo"
 }
 
 extension Category: CaseIterable{   }
@@ -44,3 +45,5 @@ class Donation: Identifiable {
     var description: String
     var time: Date()
 }
+
+reverseGeocoding(latitude: 37.484928, longitude: -122.148201)
