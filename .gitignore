@@ -1,0 +1,36 @@
+# Xcode
+.DS_Store
+*.xcodeproj
+*.xcworkspace
+*.playground
+xcuserdata/
+DerivedData/
+build/
+*.xcassets/
+*.xccheckout
+*.xcscheme
+*.swiftpm/xcode/package.xcworkspace/xcshareddata/
+*.swiftpm/xcode/xcuserdata/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# CocoaPods
+Pods/
+!Pods/.gitkeep # Keep this line if you want to track the Pods directory but ignore its contents
+
+# Carthage
+Carthage/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Other
+.env
+.env.*
+tmp/
+
