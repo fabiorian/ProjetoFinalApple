@@ -12,7 +12,9 @@ import SwiftUI
 
 class ViewController: UIViewController, MKMapViewDelegate {
 
+
     //Definindo variáveis
+    var DHonClick: ((DonationsHouse) -> Void)?
     var mapView: MKMapView!
     var locationManager: CLLocationManager!
     var mapType: MKMapType = .standard{
@@ -37,7 +39,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         mapView.mapType = mapType
         mapView.pointOfInterestFilter = .excludingAll
 
-    ///Definindo locais limite do mapa (local inicial, zoom e raio do mapa)
+        ///Definindo locais limite do mapa (local inicial, zoom e raio do mapa)
 
         let initialLocation = CLLocation(latitude: -3.71722, longitude: -38.54333)
         let regionRadius: CLLocationDistance = 11000
@@ -47,9 +49,21 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let cameraBoundary = MKMapView.CameraBoundary(coordinateRegion: coordinateRegion)
         mapView.setCameraBoundary(cameraBoundary, animated: true)
 
-        let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 1000, maxCenterCoordinateDistance: 20000)
+        let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 3000, maxCenterCoordinateDistance: 20000)
         mapView.setCameraZoomRange(zoomRange, animated: true)
+
+        addAnnotations()
     }
+
+    func addAnnotations() {
+        for house in donationHouse {
+               let annotation = MKPointAnnotation()
+               annotation.title = house.name
+               annotation.subtitle = house.description
+               annotation.coordinate = CLLocationCoordinate2D(latitude: house.latitude, longitude: house.longitude)
+               mapView.addAnnotation(annotation)
+           }
+       }
 
 
 
@@ -81,9 +95,22 @@ class ViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
     }
 
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//
+//    }
 
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotation = view.annotation else { return }
+
+              if let selectedHouse = donationHouse.first(where: {
+                  $0.latitude == annotation.coordinate.latitude &&
+                  $0.longitude == annotation.coordinate.longitude
+              }) {
+                  DHonClick?(selectedHouse)
+              }
+          }
     }
+
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             let identifier = "DonationHousePin"
@@ -100,14 +127,16 @@ class ViewController: UIViewController, MKMapViewDelegate {
 
             return annotationView
         }
-    }
+
 struct MapViewController: UIViewControllerRepresentable {
     @Binding var mapType: MKMapType
     var donationHouse: [DonationsHouse]
+    var DHonClick: (DonationsHouse) -> Void
 
     func makeUIViewController(context: Context) -> ViewController {
         let vc = ViewController()
         vc.mapType = mapType
+        vc.DHonClick = DHonClick
         vc.donationHouse = donationHouse
         return vc
     }
