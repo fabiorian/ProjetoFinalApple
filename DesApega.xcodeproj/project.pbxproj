@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2203573A2E33FE99008735FC /* Doador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220357392E33FE8C008735FC /* Doador.swift */; };
+		22EC55462E26C59A005F9C6B /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC55452E26C595005F9C6B /* OnboardingPage.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		220357392E33FE8C008735FC /* Doador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doador.swift; sourceTree = "<group>"; };
 		2227BB942E18671600EDA347 /* DesApega.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesApega.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22EC55452E26C595005F9C6B /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -34,6 +41,8 @@
 			children = (
 				2227BB962E18671600EDA347 /* DesApega */,
 				2227BB952E18671600EDA347 /* Products */,
+				22EC55452E26C595005F9C6B /* OnboardingPage.swift */,
+				220357392E33FE8C008735FC /* Doador.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2203573A2E33FE99008735FC /* Doador.swift in Sources */,
+				22EC55462E26C59A005F9C6B /* OnboardingPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
