@@ -24,10 +24,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		CEE5119D2E26DFF100723746 /* Exceptions for "DesApega" folder in "DesApega" target */ = {
+		CE6F5A4D2E34146100DE7FCD /* Exceptions for "DesApega" folder in "DesApega" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Classes/Donation.swift,
+				Info.plist,
+				"Recursos/Solitreo-Regular.ttf",
 			);
 			target = 2227BB932E18671600EDA347 /* DesApega */;
 		};
@@ -37,7 +38,7 @@
 		CEE511952E26DFF100723746 /* DesApega */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				CEE5119D2E26DFF100723746 /* Exceptions for "DesApega" folder in "DesApega" target */,
+				CE6F5A4D2E34146100DE7FCD /* Exceptions for "DesApega" folder in "DesApega" target */,
 			);
 			path = DesApega;
 			sourceTree = "<group>";
