@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-enum Status: String, Codable, CaseIterable {
+enum Status: String, Codable {
     case muito_ruim = "Muito ruim"
     case ruim = "Ruim"
     case bom = "Bom"
@@ -16,11 +16,16 @@ enum Status: String, Codable, CaseIterable {
     case otimo = "Ótimo"
 }
 
-enum Category: String, Codable, CaseIterable {
+extension Status: CaseIterable {  }
+
+enum Category: String, Codable {
     case clothe = "Roupa"
     case footwear = "Calçado"
     case eletronic = "Eletrônico"
+    case toy = "Brinquedo"
 }
+
+extension Category: CaseIterable {  }
 
 @Model
 class Donation {
