@@ -8,10 +8,11 @@
 import SwiftUI
 
 @main
-struct DesApegaApp: App {
+struct TeladeboasvindasApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [Donation.self])
     }
 }
