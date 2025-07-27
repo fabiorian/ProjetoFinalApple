@@ -11,7 +11,7 @@ import SwiftUI
 struct TeladeboasvindasApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            mapOnView()
         }
         .modelContainer(for: [Donation.self])
     }
