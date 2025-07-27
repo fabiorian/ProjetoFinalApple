@@ -16,58 +16,21 @@ struct mapOnView: View {
     @State private var showingType = false
     @State private var selectedMapType: MKMapType = .standard
     @State var field = ""
-<<<<<<< HEAD
-
-    var body: some View {
-
-        ZStack(alignment: .bottomTrailing) {
-            MapViewController(mapType: $selectedMapType, donationHouse: DHsList)
-                .edgesIgnoringSafeArea(.all)
-
-            VStack {
-
-                Spacer()
-                HStack {
-                    Spacer()
-                    Picker("Tipo de Mapa", selection: $selectedMapType) {
-                        Text("Padrão").tag(MKMapType.standard)
-                        Text("Satélite").tag(MKMapType.hybrid)
-                    }
-                    .pickerStyle(.menu)
-                    .background(Color.white.opacity(0.8))
-                    .cornerRadius(8)
-                    .padding()
-
-                }
-            }
-        }
-    }
-
-    class ContentViewModel: ObservableObject {
-        let results = [
-            "oi", "oi nao"
-        ]
-    }
-    var filtered: [String] = []
-
-}
-
-=======
     @State var showingList: Bool = false
     @State private var selectedHouse: DonationsHouse? = nil
-
+    
     
     var body: some View {
         NavigationView{
-
+            
             ZStack(alignment: .bottomTrailing) {
                 MapViewController(mapType: $selectedMapType, donationHouse: donationHouses(), DHonClick: {
                     house in selectedHouse = house
                 })
-                    .edgesIgnoringSafeArea(.all)
-
+                .edgesIgnoringSafeArea(.all)
+                
                 VStack {
-
+                    
                     Spacer()
                     HStack {
                         Spacer()
@@ -79,20 +42,20 @@ struct mapOnView: View {
                         .background(Color.white.opacity(0.8))
                         .cornerRadius(8)
                         .padding()
-
+                        
                     }
                 }
             }
-
+            
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-
+                    
                     Button(action: {
                         showingList = true
                     }) {
                         Label("Adicionar", systemImage: "list.bullet")
                     }
-
+                    
                 }
             }
             .sheet(isPresented: $showingList){
@@ -100,21 +63,21 @@ struct mapOnView: View {
                     .presentationDetents([.medium])
             }
             .sheet(item: $selectedHouse) { house in
-                            DHsOnClick(house: house)
+                DHsOnClick(house: house)
                     .presentationDetents([.medium])
-                }
-
+            }
+            
         }
-//        class ContentViewModel: ObservableObject {
-//            let results = [
-//                "oi", "oi nao"
-//            ]
-//        }
-//        var filtered: [String] = []
-
+        //        class ContentViewModel: ObservableObject {
+        //            let results = [
+        //                "oi", "oi nao"
+        //            ]
+        //        }
+        //        var filtered: [String] = []
+        
     }
 }
->>>>>>> teste1
+
 #Preview {
     mapOnView()
 }

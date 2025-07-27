@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  DesApega
-//
-//  Created by User on 11/07/25.
-//
-
 import UIKit
 import MapKit
 import CoreLocation

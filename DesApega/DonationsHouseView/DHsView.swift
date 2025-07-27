@@ -62,5 +62,5 @@ struct DHsView: View {
     }
 }
 #Preview {
-    DHsView(DHs: DonationsHouse(name: "Casa de Doação", category: .clothe, description: "Aceitamos roupas para uso em nossa  comunidade", latitude: -3.895542, longitude: -38.70283))
+    DHsView(DHs: DonationsHouse(name: "Casa de Doação", category: .clothe, description: "Aceitamos roupas para uso em nossa  comunidade", latitude: -3.895542, longitude: -38.70283, imageName: ""))
 }

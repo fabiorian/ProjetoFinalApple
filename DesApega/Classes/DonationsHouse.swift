@@ -1,9 +1,3 @@
-//
-//  DonationsHouse.swift
-//  DesApega
-//
-//  Created by User on 15/07/25.
-//
 import MapKit
 import Foundation
 import CoreLocation
@@ -46,11 +40,7 @@ class DonationsHouseAnnotation: NSObject, MKAnnotation {
     }
 }
 
-<<<<<<< HEAD
-class DonationsHouse: Identifiable, Decodable {
-=======
 class DonationsHouse: Identifiable {
->>>>>>> teste1
     var id: UUID
     var name: String
     var category: Category
@@ -120,18 +110,6 @@ class DonationsHouse: Identifiable {
         }
     }
 }
-<<<<<<< HEAD
-
-    enum Category: String, Codable {
-        case clothe = "Roupa"
-        case footwear = "Calçado"
-        case eletronic = "Eletrônico"
-        case toy = "Brinquedo"
-    }
-
-extension Category: CaseIterable{   }
-
-=======
 //
 //    enum Category: String, Codable {
 //        case clothe = "Roupa"
@@ -142,7 +120,6 @@ extension Category: CaseIterable{   }
 //
 //extension Category: CaseIterable{   }
 //
->>>>>>> teste1
 
 
 
@@ -151,13 +128,8 @@ func donationHouses() -> [DonationsHouse] {
         name: "Casa da Esperança",
         category: .clothe,
         description: "Recebemos roupas de todos os tamanhos e para todas as idades.",
-<<<<<<< HEAD
-        latitude: -3.731861,
-        longitude: -38.526667, // Exemplo de coordenada em Fortaleza
-=======
         latitude: -5.9 ,
         longitude: -39.9, // Exemplo de coordenada em Fortaleza
->>>>>>> teste1
         imageName: "Esperanca"
     )
 
@@ -199,8 +171,4 @@ func donationHouses() -> [DonationsHouse] {
 
     return [house1, house2, house3, house4, house5]
 }
-
-
-
-
 

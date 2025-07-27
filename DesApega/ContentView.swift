@@ -20,7 +20,7 @@ struct ContentView: View {
     
     
     var body: some View {
-
+        
         ZStack {
             Color.black
                 .ignoresSafeArea()
@@ -97,17 +97,17 @@ struct ContentView: View {
         }
         .fullScreenCover(isPresented: $showSheet) {
             mapOnView()
-=======
-        VStack {
-            Image(systemName: "star")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, Foundation!")
->>>>>>> coreLocation&&rotas
+            
+            VStack {
+                Image(systemName: "star")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                Text("Hello, Foundation!")
+                
+            }
         }
     }
 }
-
 #Preview {
     ContentView()
 }
