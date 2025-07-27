@@ -97,17 +97,10 @@ struct ContentView: View {
         }
         .fullScreenCover(isPresented: $showSheet) {
             mapOnView()
-            
-            VStack {
-                Image(systemName: "star")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, Foundation!")
-                
-            }
         }
     }
 }
+
 #Preview {
     ContentView()
 }

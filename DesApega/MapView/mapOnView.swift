@@ -12,6 +12,7 @@ import MapKit
 let fortaleza = CLLocation(latitude: -5.9 , longitude: -39.9)
 
 struct mapOnView: View {
+    @State private var selectTab = 0
     @Environment(\.dismiss) var dismiss
     @State private var showingType = false
     @State private var selectedMapType: MKMapType = .standard
@@ -21,60 +22,53 @@ struct mapOnView: View {
     
     
     var body: some View {
-        NavigationView{
-            
-            ZStack(alignment: .bottomTrailing) {
-                MapViewController(mapType: $selectedMapType, donationHouse: donationHouses(), DHonClick: {
-                    house in selectedHouse = house
-                })
-                .edgesIgnoringSafeArea(.all)
-                
-                VStack {
+        NavigationStack{
+            TabView(selection: $selectTab) {
+                ZStack(alignment: .bottomTrailing) {
+                    MapViewController(mapType: $selectedMapType, donationHouse: donationHouses(), DHonClick: {
+                        house in selectedHouse = house
+                    })
+                    .edgesIgnoringSafeArea(.top)
                     
-                    Spacer()
-                    HStack {
+                    VStack {
                         Spacer()
-                        Picker("Tipo de Mapa", selection: $selectedMapType) {
-                            Text("Padrão").tag(MKMapType.standard)
-                            Text("Satélite").tag(MKMapType.hybrid)
+                        HStack {
+                            Spacer()
+                            Picker("Tipo de Mapa", selection: $selectedMapType) {
+                                Text("Padrão").tag(MKMapType.standard)
+                                Text("Satélite").tag(MKMapType.hybrid)
+                            }
+                            .pickerStyle(.menu)
+                            .background(Color.white.opacity(0.8))
+                            .cornerRadius(8)
+                            .padding()
+                            
                         }
-                        .pickerStyle(.menu)
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(8)
-                        .padding()
-                        
                     }
                 }
-            }
-            
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    
-                    Button(action: {
-                        showingList = true
-                    }) {
-                        Label("Adicionar", systemImage: "list.bullet")
-                    }
-                    
+                .tabItem {
+                    Image(systemName: "map")
+                    Text("mapa")
                 }
-            }
-            .sheet(isPresented: $showingList){
+                HistoricView()
+                    .tabItem {
+                        Image(systemName: "clock")
+                        Text("Histórico")
+                    }
                 ListDHsView()
-                    .presentationDetents([.medium])
+                    .tabItem{
+                        Image(systemName: "list.bullet")
+                        Text("Casas de Doações")
+                    }
+                VStack{
+                    Text("quem ler é gay")
+                }
+                .tabItem{
+                    Image(systemName: "questionmark.circle")
+                    Text("Guia")
+                }
             }
-            .sheet(item: $selectedHouse) { house in
-                DHsOnClick(house: house)
-                    .presentationDetents([.medium])
-            }
-            
         }
-        //        class ContentViewModel: ObservableObject {
-        //            let results = [
-        //                "oi", "oi nao"
-        //            ]
-        //        }
-        //        var filtered: [String] = []
-        
     }
 }
 
