@@ -15,7 +15,7 @@ struct OnboardingPage: Identifiable {
 }
 
 let onboardingPages = [
-    OnboardingPage(image: "life_is_strange", title: "Bem-vindo!", description: "Este app te ajuda a doar seus itens para quem precisa"),
-    OnboardingPage(image: "", title: "", description: ""),
-    OnboardingPage(image: "", title: "", description: "")
+    OnboardingPage(image: "Logo", title: "Bem-vindo!", description: "Este app te ajuda a doar seus itens para quem precisa"),
+    OnboardingPage(image: "Doador", title: "Identifique-se", description: "Escolha se você é um doador..."),
+    OnboardingPage(image: "ONG", title: "", description: "...ou se você faz parte de uma ONG.")
 ]
