@@ -22,11 +22,11 @@ struct DHsOnClick: View {
             Image(house.imageName ?? "placemaker")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                    .scaledToFill()
-                    .frame(height: .infinity)
-                    .clipped()
-                    .cornerRadius(12)
-                    .padding(.horizontal)
+                   .scaledToFill()
+                   .frame(height: .infinity)
+                   .clipped()
+                   .cornerRadius(12)
+                   .padding(.horizontal)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(house.name)
@@ -44,11 +44,12 @@ struct DHsOnClick: View {
                 Label("Descrição: \(house.description)", systemImage: "info.circle")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+
                 HStack {
                     Spacer()
                     Button(action: {
-                    // Ação de rota, se desejar implementar
-                }) {
+                        // Ação de rota, se desejar implementar
+                    }) {
                         Label("Ver rota", systemImage: "location.fill")
                             .padding(.horizontal)
                             .padding(.vertical, 8)
@@ -68,6 +69,7 @@ struct DHsOnClick: View {
 //                            .foregroundColor(.white)
 //                            .background(Color.green)
 //                            .cornerRadius(20)
+                            
                     }
                     Spacer()
                 }
@@ -91,6 +93,7 @@ struct DHsOnClick: View {
         .frame(maxWidth: .greatestFiniteMagnitude)
     }
 }
+
 func iconForCategory(_ category: Category) -> String {
     switch category {
     case .clothe: return "tshirt"

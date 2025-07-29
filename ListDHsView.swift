@@ -29,6 +29,6 @@ struct ListDHsView: View {
         }
     }
 }
-    #Preview {
-        ListDHsView()
-    }
+#Preview {
+    ListDHsView()
+}
