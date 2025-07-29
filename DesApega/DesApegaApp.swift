@@ -13,5 +13,6 @@ struct DesApegaApp: App {
         WindowGroup {
             mapOnView()
         }
+        .modelContainer(for: [Donation.self])
     }
 }
