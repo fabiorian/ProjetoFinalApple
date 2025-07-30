@@ -83,11 +83,6 @@ struct HistoricView: View {
                 }
             }
             .navigationTitle("Hisórico de Doações")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink("Nova", destination: DesApegaView())
-                }
-            }
         }
 
         // Sheet de edição

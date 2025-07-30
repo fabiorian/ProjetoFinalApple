@@ -56,6 +56,20 @@ struct DHsOnClick: View {
                             .background(Color.blue)
                             .foregroundColor(.white)
                             .cornerRadius(10)
+                        
+                    }
+                    NavigationLink(destination: DesApegaView()) {
+                        Label("Adicionar Doação", systemImage: "plus")
+                            .padding(.horizontal)
+                            .padding(.vertical, 8)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+//                            .padding()
+//                            .foregroundColor(.white)
+//                            .background(Color.green)
+//                            .cornerRadius(20)
+                            
                     }
                     Spacer()
                 }

@@ -22,7 +22,6 @@ struct mapOnView: View {
     
     
     var body: some View {
-        NavigationStack{
             TabView(selection: $selectTab) {
                 ZStack(alignment: .bottomTrailing) {
                     MapViewController(mapType: $selectedMapType, donationHouse: donationHouses(), DHonClick: {
@@ -70,7 +69,7 @@ struct mapOnView: View {
             }
         }
     }
-}
+
 
 #Preview {
     mapOnView()
