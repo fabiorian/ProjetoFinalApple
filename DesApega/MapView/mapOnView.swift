@@ -67,6 +67,7 @@ struct mapOnView: View {
                     Text("Guia")
                 }
             }
+            
         }
     }
 

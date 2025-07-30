@@ -15,7 +15,7 @@ struct ContentView: View {
     
     private let desAppearDelay: TimeInterval = 1.0
     private let apegaAppearDelay: TimeInterval = 2.0
-    private let stayDuration: TimeInterval = 1.5
+    private let stayDuration: TimeInterval = 1.0
     private let letterFadeDelay: TimeInterval = 0.1
     
     

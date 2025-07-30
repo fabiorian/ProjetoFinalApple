@@ -82,7 +82,7 @@ struct HistoricView: View {
                     }
                 }
             }
-            .navigationTitle("Hisórico de Doações")
+            .navigationTitle("Histórico de Doações")
         }
 
         // Sheet de edição
