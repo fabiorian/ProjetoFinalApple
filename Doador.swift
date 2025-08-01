@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct Doador: View {
+    @State private var irParaMapa = false
     var body: some View {
-        NavigationStack {
+        if irParaMapa {
+            mapOnView()
+        } else {
             VStack(spacing: 40) {
                 Text("Identifique-se")
                     .font(.title)
                     .fontWeight(.semibold)
-                
+
                 HStack(spacing: 40) {
-                    NavigationLink(destination: mapOnView()) {
+                    Button(action: {
+                        irParaMapa = true
+                    }) {
                         VStack(spacing: 20) {
                             Image("Doador")
                                 .resizable()
@@ -28,10 +33,10 @@ struct Doador: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    
+
                     Divider()
                         .frame(height: 160)
-                    
+
                     VStack(spacing: 20) {
                         Image("ONG")
                             .resizable()
@@ -40,7 +45,7 @@ struct Doador: View {
                             .foregroundColor(.blue)
                         Text("Sou uma ONG")
                             .font(.headline)
-                        
+
                         HStack(spacing: 6) {
                             Image(systemName: "clock")
                                 .font(.subheadline)

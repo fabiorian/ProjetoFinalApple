@@ -7,20 +7,20 @@
 
 import SwiftUI
 
+
 struct OnboardingView: View {
-    @Binding var showOnboarding: Bool
+    @State private var showOnBoarding: Bool = true
     @State private var currentPage = 0
     @State private var navigateOnboarding = false
 
     var body: some View {
-        NavigationStack {
             VStack {
                 Spacer()
-                
+
                 Image(onboardingPages[currentPage].image)
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 120)
+                    .frame(height: 300)
                     .padding()
                 
                 Text(onboardingPages[currentPage].title)
@@ -32,7 +32,7 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 
-                Spacer()
+//                Spacer()
                 
                 HStack {
                     if currentPage > 0 {
@@ -51,32 +51,19 @@ struct OnboardingView: View {
                             if currentPage < onboardingPages.count - 1 {
                                 currentPage += 1
                             } else {
-                                showOnboarding = false
-                                UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
-                                navigateOnboarding = true
+                                currentPage = 0
                             }
                         }
                     }
                     .padding()
                 }
                 .padding(.horizontal)
-                
-                NavigationLink(destination: Doador(), isActive: $navigateOnboarding) {
-                    EmptyView()
-                }
+                Spacer()
             }
             .transition(.slide)
         }
     }
-}
+
 #Preview {
-    struct Preview: View {
-        @State private var show = true
-
-        var body: some View {
-            OnboardingView(showOnboarding: $show)
-        }
-    }
-
-    return Preview()
+    OnboardingView()
 }

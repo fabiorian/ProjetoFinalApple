@@ -30,7 +30,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
     //Chamando quando carregado
     override func viewDidLoad() {
         super.viewDidLoad()
-
         mapView = MKMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self

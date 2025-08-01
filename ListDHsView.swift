@@ -18,7 +18,7 @@ struct ListDHsView: View {
                         .foregroundColor(.indigo)
                         .padding(.top, 16)
                         .padding(.bottom, 12),
-                        footer: Text("@Todos os direitos reservados ao enzo")){
+                        footer: Text("@Todos os direitos reservados ao Enzo")){
                     ForEach(DHsList) { DH in
                         NavigationLink(destination: DHsOnClick(house: DH)){
                             DHsView(DHs: DH)

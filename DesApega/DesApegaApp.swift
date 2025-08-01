@@ -11,7 +11,8 @@ import SwiftUI
 struct DesApegaApp: App {
     var body: some Scene {
         WindowGroup {
-            mapOnView()
+            ContentView()
         }
+        .modelContainer(for: Donation.self)
     }
 }

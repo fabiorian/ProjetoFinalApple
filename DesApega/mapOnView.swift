@@ -27,6 +27,7 @@ struct mapOnView: View {
     @State var showingList: Bool = false
     @State private var selectedHouse: DonationsHouse? = nil
     
+//    var mostreLaEle = OnboardingView.init(showOnBoarding: true)
     
     var body: some View {
         TabView(selection: $selectTab) {
@@ -52,26 +53,28 @@ struct mapOnView: View {
                     }
                 }
             }
+            .tag(0)
             .tabItem {
                 Image(systemName: "map")
                 Text("mapa")
             }
             HistoricView()
+                .tag(1)
                 .tabItem {
                     Image(systemName: "clock")
                     Text("Histórico")
                 }
             ListDHsView()
+                .tag(2)
                 .tabItem{
                     Image(systemName: "list.bullet")
                     Text("Casas de Doações")
                 }
-            VStack{
-                Text("quem ler é gay")
-            }
-            .tabItem{
-                Image(systemName: "questionmark.circle")
-                Text("Guia")
+            OnboardingView()
+                .tag(3)
+                .tabItem{
+                    Image(systemName: "questionmark.circle")
+                    Text("Guia")
             }
         }
             

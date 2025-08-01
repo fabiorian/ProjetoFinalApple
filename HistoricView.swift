@@ -58,7 +58,15 @@ struct HistoricView: View {
                     .background(doacaoSelecionada?.id == donation.id ? Color.blue.opacity(0.1) : Color.clear)
                     .animation(.easeInOut, value: doacaoSelecionada?.id)
                 }
-
+                .navigationTitle("Histórico de doações")
+//                VStack{
+//                    Text("Histórico de doações")
+//                        .font(.largeTitle)
+//                        .bold()
+//                        .padding(.bottom, 750)
+//                        .padding(.horizontal)
+//
+//                }
                 // Rodapé com os botões Editar e Excluir
                 if doacaoSelecionada != nil {
                     VStack {
@@ -82,7 +90,7 @@ struct HistoricView: View {
                     }
                 }
             }
-            .navigationTitle("Histórico de Doações")
+           
         }
 
         // Sheet de edição
@@ -123,6 +131,7 @@ struct HistoricView: View {
             Text("Deseja realmente excluir esta doação?")
         }
     }
+    
 }
 
 private let dateFormatter: DateFormatter = {
