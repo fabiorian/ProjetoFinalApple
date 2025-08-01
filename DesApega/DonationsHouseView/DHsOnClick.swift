@@ -6,18 +6,21 @@
 //
 
 import SwiftUI
+import MapKit
+import CoreLocation
 
 struct DHsOnClick: View {
     let house: DonationsHouse
+    var showingRoute: ((CLLocationCoordinate2D) -> Void)?
     @State private var endereco: String = ""
     @Environment(\.dismiss) var dismiss
-
+    
     var body: some View {
         
 
         NavigationStack(){
             VStack(spacing: 12) {
-                Spacer()
+//                Spacer()
 
 
                 //            Capsule()
@@ -53,7 +56,9 @@ struct DHsOnClick: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            // Ação de rota, se desejar implementar
+                            let destination = CLLocationCoordinate2D(latitude: house.latitude, longitude: house.longitude)
+                            showingRoute?(destination)
+                            dismiss()
                         }) {
                             Label("Ver rota", systemImage: "location.fill")
                                 .padding(.horizontal)
@@ -86,12 +91,8 @@ struct DHsOnClick: View {
                     endereco = result ?? "Endereço não disponível"
                 }
             }
-//            .padding(.bottom, 200)
-            //        .background(
-            //            RoundedRectangle(cornerRadius: 10)
-            //                .fill(Color(.systemBackground))
-            //                .shadow(radius: 10)
-            //        )
+            .padding(.bottom, 200)
+
             .frame(maxWidth: .greatestFiniteMagnitude)
             
         }.navigationBarBackButtonHidden(true)

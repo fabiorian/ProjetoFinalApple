@@ -24,7 +24,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
     }
-
+    var currentLocation: CLLocationCoordinate2D?
     var donationHouse: [DonationsHouse] = []
 
     //Chamando quando carregado
@@ -46,11 +46,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
 
-        mapView = MKMapView(frame: view.bounds)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.delegate = self
-        view.addSubview(mapView)
-
         mapView.mapType = mapType
         mapView.pointOfInterestFilter = .excludingAll
 
@@ -66,27 +61,55 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let cameraBoundary = MKMapView.CameraBoundary(coordinateRegion: coordinateRegion)
         mapView.setCameraBoundary(cameraBoundary, animated: true)
 
-        let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 6000, maxCenterCoordinateDistance: 30000)
+        let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 10000, maxCenterCoordinateDistance: 30000)
         mapView.setCameraZoomRange(zoomRange, animated: true)
 
         addAnnotations()
 
-//        locationManagerAuthorization(locationManager)
+
+    }
+    func  showRoute(to destinationCoordinate: CLLocationCoordinate2D){
+        guard let userCoordinate = currentLocation else {
+            print("Localização atual não dísponivel")
+            return
+        }
+
+        let sourcePlacemark = MKPlacemark(coordinate: userCoordinate)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
+
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: sourcePlacemark)
+        request.destination = MKMapItem(placemark: destinationPlacemark)
+        request.transportType = .automobile
+
+        let directions = MKDirections(request: request)
+        directions.calculate { [weak self] response, error in
+            guard let self = self else {return}
+            if let error = error {
+                print("Erro ao calcular rota: \(error.localizedDescription)")
+                return
+            }
+
+            guard let route = response?.routes.first else {
+                print("Nenhuma rota encontrada")
+                return
+            }
+
+            self.mapView.removeOverlays(self.mapView.overlays)
+            self.mapView.addOverlay(route.polyline)
+            self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 40, left: 20, bottom: 40, right: 20), animated: true)
+        }
     }
 
     func addAnnotations() {
         for house in donationHouse {
-               let annotation = MKPointAnnotation()
-               annotation.title = house.name
-               annotation.subtitle = house.description
-               annotation.coordinate = CLLocationCoordinate2D(latitude: house.latitude, longitude: house.longitude)
-               mapView.addAnnotation(annotation)
-           }
-       }
-
-
-
-
+            let annotation = MKPointAnnotation()
+            annotation.title = house.name
+            annotation.subtitle = house.description
+            annotation.coordinate = CLLocationCoordinate2D(latitude: house.latitude, longitude: house.longitude)
+            mapView.addAnnotation(annotation)
+        }
+    }
     func locationManagerAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .notDetermined:
@@ -102,6 +125,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
+        currentLocation = location.coordinate
         print("Localização atual: \(location.coordinate.latitude), \(location.coordinate.longitude)")
         let region = MKCoordinateRegion(
             center: location.coordinate,
@@ -120,6 +144,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
     }
 
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let polyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            renderer.strokeColor = .systemBlue
+            renderer.lineWidth = 4.0
+            return renderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
+    }
+
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
 
@@ -128,9 +162,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                   $0.longitude == annotation.coordinate.longitude
               }) {
                   DHonClick?(selectedHouse)
+                  showRoute(to: annotation.coordinate)
               }
           }
-    }
+
 
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -147,7 +182,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
 
             return annotationView
-        }
+    }
+}
 
 struct MapViewController: UIViewControllerRepresentable {
     @Binding var mapType: MKMapType
@@ -159,10 +195,13 @@ struct MapViewController: UIViewControllerRepresentable {
         vc.mapType = mapType
         vc.DHonClick = DHonClick
         vc.donationHouse = donationHouse
+
         return vc
     }
 
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
         uiViewController.mapType = mapType
+
+
     }
 }

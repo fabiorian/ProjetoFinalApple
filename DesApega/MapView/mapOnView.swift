@@ -5,33 +5,40 @@
 //  Created by User on 11/07/25.
 //
 
+//
+//  mapOnView.swift
+//  DesApega
+//
+//  Created by User on 11/07/25.
+//
+
 import SwiftUI
 import MapKit
-import CoreLocation
+
+
 
 let fortaleza = CLLocation(latitude: -5.9 , longitude: -39.9)
 
 struct mapOnView: View {
+    @State private var selectTab = 0
     @Environment(\.dismiss) var dismiss
     @State private var showingType = false
     @State private var selectedMapType: MKMapType = .standard
     @State var field = ""
     @State var showingList: Bool = false
     @State private var selectedHouse: DonationsHouse? = nil
-
-
     
+
     var body: some View {
-        NavigationView{
-            
+        TabView(selection: $selectTab) {
             ZStack(alignment: .bottomTrailing) {
                 MapViewController(mapType: $selectedMapType, donationHouse: donationHouses(), DHonClick: {
                     house in selectedHouse = house
                 })
-                    .edgesIgnoringSafeArea(.all)
 
+                .edgesIgnoringSafeArea(.top)
+                    
                 VStack {
-
                     Spacer()
                     HStack {
                         Spacer()
@@ -43,43 +50,40 @@ struct mapOnView: View {
                         .background(Color.white.opacity(0.8))
                         .cornerRadius(8)
                         .padding()
-
+                            
                     }
                 }
             }
-
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-
-                    Button(action: {
-                        showingList = true
-                    }) {
-                        Label("Adicionar", systemImage: "list.bullet")
-                    }
-
-                }
+            .tabItem {
+                Image(systemName: "map")
+                Text("mapa")
             }
-            .sheet(isPresented: $showingList){
-                ListDHsView()
-                    .presentationDetents([.medium])
-            }
-            .sheet(item: $selectedHouse) { house in
-                            DHsOnClick(house: house)
-                    .presentationDetents([.medium])
+            HistoricView()
+                .tabItem {
+                    Image(systemName: "clock")
+                    Text("Histórico")
                 }
+            ListDHsView()
+                .tabItem{
+                    Image(systemName: "list.bullet")
+                    Text("Casas de Doações")
+                }
+            VStack{
+                Text("quem ler é gay")
+            }
+            .tabItem{
+                Image(systemName: "questionmark.circle")
+                Text("Sobre")
+            }
 
+            }
+        .sheet(item: $selectedHouse) { house in
+            DHsOnClick(house: house)
+                .presentationDetents([.height(530)])
         }
-//        class ContentViewModel: ObservableObject {
-//            let results = [
-//                "oi", "oi nao"
-//            ]
-//        }
-//        var filtered: [String] = []
-
     }
 }
 
 #Preview {
     mapOnView()
 }
-
