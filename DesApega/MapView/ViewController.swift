@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  DesApega
-//
-//  Created by User on 11/07/25.
-//
-
 import UIKit
 import MapKit
 import CoreLocation
@@ -17,13 +10,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var DHonClick: ((DonationsHouse) -> Void)?
     var mapView: MKMapView!
     var locationManager: CLLocationManager!
-    var mapType: MKMapType = .standard{
+    var mapType: MKMapType = .mutedStandard{
         didSet {
             if mapView != nil {
                 mapView.mapType = mapType
             }
         }
     }
+
     var currentLocation: CLLocationCoordinate2D?
     var donationHouse: [DonationsHouse] = []
 
@@ -49,6 +43,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.mapType = mapType
         mapView.pointOfInterestFilter = .excludingAll
 
+        mapView.overrideUserInterfaceStyle = .dark
 
 
         ///Definindo locais limite do mapa (local inicial, zoom e raio do mapa)
@@ -66,6 +61,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
         addAnnotations()
 
+//        currentLocation = CLLocationCoordinate2D(latitude: -3.7319, longitude: -38.5267)
 
     }
     func  showRoute(to destinationCoordinate: CLLocationCoordinate2D){
@@ -156,15 +152,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
+        if let selectedHouse = donationHouse.first(where: {
+            $0.latitude == annotation.coordinate.latitude &&
+            $0.longitude == annotation.coordinate.longitude
+        }) {
+            DHonClick?(selectedHouse)
 
-              if let selectedHouse = donationHouse.first(where: {
-                  $0.latitude == annotation.coordinate.latitude &&
-                  $0.longitude == annotation.coordinate.longitude
-              }) {
-                  DHonClick?(selectedHouse)
-                  showRoute(to: annotation.coordinate)
-              }
-          }
+            if let userLocation = currentLocation {
+                showRoute(to: annotation.coordinate)
+            } else {
+                print("Localização do usuário ainda não carregada.")
+            }
+        }
+    }
 
 
 

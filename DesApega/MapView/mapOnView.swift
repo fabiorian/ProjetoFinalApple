@@ -1,21 +1,5 @@
-//
-//  mapOnView.swift
-//  DesApega
-//
-//  Created by User on 11/07/25.
-//
-
-//
-//  mapOnView.swift
-//  DesApega
-//
-//  Created by User on 11/07/25.
-//
-
 import SwiftUI
 import MapKit
-
-
 
 let fortaleza = CLLocation(latitude: -5.9 , longitude: -39.9)
 
@@ -27,62 +11,58 @@ struct mapOnView: View {
     @State var field = ""
     @State var showingList: Bool = false
     @State private var selectedHouse: DonationsHouse? = nil
-    
 
     var body: some View {
         TabView(selection: $selectTab) {
-            ZStack(alignment: .bottomTrailing) {
-                MapViewController(mapType: $selectedMapType, donationHouse: donationHouses(), DHonClick: {
-                    house in selectedHouse = house
-                })
-
-                .edgesIgnoringSafeArea(.top)
-                    
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Picker("Tipo de Mapa", selection: $selectedMapType) {
-                            Text("Padrão").tag(MKMapType.standard)
-                            Text("Satélite").tag(MKMapType.hybrid)
-                        }
-                        .pickerStyle(.menu)
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(8)
-                        .padding()
-                            
-                    }
-                }
+            ZStack {
+                Color.black.ignoresSafeArea(.keyboard)
+                MapViewController(
+                    mapType: $selectedMapType,
+                    donationHouse: donationHouses(),
+                    DHonClick: { house in selectedHouse = house }
+                )
             }
             .tabItem {
                 Image(systemName: "map")
-                Text("mapa")
+                Text("Mapa")
             }
+
             HistoricView()
+                .background(Color.black)
                 .tabItem {
                     Image(systemName: "clock")
                     Text("Histórico")
                 }
+
             ListDHsView()
-                .tabItem{
+                .background(Color.black)
+                .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Casas de Doações")
                 }
-            VStack{
-                Text("quem ler é gay")
+
+            VStack {
+                Text("Sobre o app")
+                    .foregroundColor(.saffron)
             }
-            .tabItem{
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black)
+            .tabItem {
                 Image(systemName: "questionmark.circle")
                 Text("Sobre")
             }
-
-            }
+        }
+        .accentColor(.saffron) // cor dos ícones da tab bar
+        .preferredColorScheme(.dark) // força modo escuro
         .sheet(item: $selectedHouse) { house in
             DHsOnClick(house: house)
                 .presentationDetents([.height(530)])
         }
+        
     }
+    
 }
+
 
 #Preview {
     mapOnView()

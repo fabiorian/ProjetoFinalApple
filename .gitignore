@@ -2,6 +2,7 @@
 .DS_Store
 *.xcodeproj
 *.xcworkspace
+<<<<<<< HEAD
 *.playground
 xcuserdata/
 DerivedData/
@@ -33,4 +34,15 @@ fastlane/test_output/
 .env
 .env.*
 tmp/
+=======
+xcuserdata/
+DerivedData/
+build/
+*.pbxuser
+*.mode1v3
+*.perspectivev3
+*.xcsettings
+*.xcscheme
+*.swiftpm/
+>>>>>>> teste1
 

@@ -10,7 +10,7 @@ import CoreLocation
 import MapKit
 
 func testing(){
-    let myHouse = DonationsHouse(name: "casa do La ele", category: .eletronic, description: "aceitamos vibradores eletronicos como la eles", latitude: -3.732778, longitude: -38.526944)
+    let myHouse = DonationsHouse(name: "casa do La ele", category: .eletronic, description: "aceitamos vibradores eletronicos como la eles", latitude: -3.732778, longitude: -38.526944, imageName: "")
 
     myHouse.reverseGeocoding{ address in
         if let address = address {

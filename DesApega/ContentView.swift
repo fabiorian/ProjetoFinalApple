@@ -6,6 +6,12 @@
 //
 import SwiftUI
 
+extension Color {
+    static let saffron = Color(red: 241/255, green: 195/255, blue: 56/255)
+}
+
+
+
 struct ContentView: View {
     @State private var showDes = false
     @State private var showApega = false
@@ -15,11 +21,12 @@ struct ContentView: View {
     
     private let desAppearDelay: TimeInterval = 1.0
     private let apegaAppearDelay: TimeInterval = 2.0
-    private let stayDuration: TimeInterval = 1.5
+    private let stayDuration: TimeInterval = 1.0
     private let letterFadeDelay: TimeInterval = 0.1
     
     
     var body: some View {
+        
         ZStack {
             Color.black
                 .ignoresSafeArea()

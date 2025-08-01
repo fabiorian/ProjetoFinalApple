@@ -23,6 +23,7 @@ struct DHsOnClick: View {
 //                Spacer()
 
 
+
                 //            Capsule()
                 //                .frame(width: 40, height: 5)
                 //                .foregroundColor(.gray.opacity(0.3))
@@ -63,8 +64,8 @@ struct DHsOnClick: View {
                             Label("Ver rota", systemImage: "location.fill")
                                 .padding(.horizontal)
                                 .padding(.vertical, 8)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
+                                .background(Color.saffron)
+                                .foregroundColor(.black)
                                 .cornerRadius(10)
                         }
                         Spacer()

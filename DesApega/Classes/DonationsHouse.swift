@@ -1,9 +1,3 @@
-//
-//  DonationsHouse.swift
-//  DesApega
-//
-//  Created by User on 15/07/25.
-//
 import MapKit
 import Foundation
 import CoreLocation
@@ -177,8 +171,4 @@ func donationHouses() -> [DonationsHouse] {
 
     return [house1, house2, house3, house4, house5]
 }
-
-
-
-
 
