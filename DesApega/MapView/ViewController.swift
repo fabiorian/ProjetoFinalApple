@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 import SwiftUI
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
 
     //Definindo variáveis
@@ -35,9 +35,26 @@ class ViewController: UIViewController, MKMapViewDelegate {
         mapView = MKMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self
+        mapView.showsUserLocation = true
         view.addSubview(mapView)
         mapView.mapType = mapType
         mapView.pointOfInterestFilter = .excludingAll
+
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+
+        mapView = MKMapView(frame: view.bounds)
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mapView.delegate = self
+        view.addSubview(mapView)
+
+        mapView.mapType = mapType
+        mapView.pointOfInterestFilter = .excludingAll
+
+
 
         ///Definindo locais limite do mapa (local inicial, zoom e raio do mapa)
 
@@ -49,10 +66,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let cameraBoundary = MKMapView.CameraBoundary(coordinateRegion: coordinateRegion)
         mapView.setCameraBoundary(cameraBoundary, animated: true)
 
-        let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 3000, maxCenterCoordinateDistance: 20000)
+        let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 6000, maxCenterCoordinateDistance: 30000)
         mapView.setCameraZoomRange(zoomRange, animated: true)
 
         addAnnotations()
+
+//        locationManagerAuthorization(locationManager)
     }
 
     func addAnnotations() {
@@ -68,36 +87,38 @@ class ViewController: UIViewController, MKMapViewDelegate {
 
 
 
-    func locationManagerAuthorization(_ manager: CLLocationManager){
-        switch manager.authorizationStatus{
-        case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
-        case .denied, .restricted:
-            print("Localização não autorizada")
+    func locationManagerAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+        case .denied, .restricted:
+            print("Localização negada ou restrita.")
         @unknown default:
-            fatalError("Status de autorização desconhecido")
+            break
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        guard let location = locations.last else{ return}
-        let managerRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(managerRegion, animated: true)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        print("Localização atual: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+        let region = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
+        )
+        mapView.setRegion(region, animated: true)
         locationManager.stopUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Erro ao tentar obter a localização: \(error.localizedDescription)")
+        print("Erro ao obter localização: \(error.localizedDescription)")
     }
+
 
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
     }
-
-//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-//
-//    }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }

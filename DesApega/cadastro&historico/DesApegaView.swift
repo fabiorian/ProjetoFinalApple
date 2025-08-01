@@ -136,14 +136,14 @@ struct DesApegaView: View {
                 }
             }
             .padding()
-            .onChange(of: imagemSelecionada) { item in
-                Task {
-                    if let data = try? await item?.loadTransferable(type: Data.self),
-                       let uiImage = UIImage(data: data) {
-                        self.imagem = uiImage
-                    }
-                }
-            }
+//            .onChange(of: imagemSelecionada) { item in
+//                Task {
+//                    if let data = try? await item?.loadTransferable(type: Data.self),
+//                       let uiImage = UIImage(data: data) {
+//                        self.imagem = uiImage
+//                    }
+//                }
+//            }
         }
         .navigationTitle(doacaoExistente == nil ? "Nova Doação" : "Editar Doação")
     }

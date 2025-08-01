@@ -7,7 +7,7 @@
 
 import SwiftUI
 import MapKit
-
+import CoreLocation
 
 let fortaleza = CLLocation(latitude: -5.9 , longitude: -39.9)
 
@@ -19,10 +19,11 @@ struct mapOnView: View {
     @State var showingList: Bool = false
     @State private var selectedHouse: DonationsHouse? = nil
 
+
     
     var body: some View {
         NavigationView{
-
+            
             ZStack(alignment: .bottomTrailing) {
                 MapViewController(mapType: $selectedMapType, donationHouse: donationHouses(), DHonClick: {
                     house in selectedHouse = house
@@ -77,8 +78,8 @@ struct mapOnView: View {
 
     }
 }
+
 #Preview {
     mapOnView()
 }
-
 

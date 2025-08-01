@@ -5,19 +5,19 @@ struct DHsView: View {
     @State private var endereco: String = ""
 
     var body: some View {
-        HStack(alignment: .top, spacing: 16) {
+        HStack(alignment: .top, spacing: 10) {
             // Ícone da categoria
-            Image(systemName: "house")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-                .padding(10)
-                .background(Color.blue.opacity(0.1))
-                .foregroundColor(.blue)
-                .clipShape(Circle())
+//            Image(systemName: "house")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 40, height: 40)
+//                .padding(10)
+//                .background(Color.blue.opacity(0.1))
+//                .foregroundColor(.blue)
+//                .clipShape(Circle())
 
             // Conteúdo principal
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(DHs.name)
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -35,9 +35,9 @@ struct DHsView: View {
 //                    .foregroundStyle(.secondary)
             }
 
-//            Spacer()
         }
-        .padding()
+
+//        .padding()
 //        .background(
 //            RoundedRectangle(cornerRadius: 16)
 //                .fill(Color(.systemBackground))
