@@ -28,7 +28,7 @@ struct DHsView: View {
 
                 Label("Tipo: \(DHs.category.rawValue)", systemImage: iconForCategory(DHs.category))
                     .font(.subheadline)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.saffron)
 
 //                Label("Descrição: \(DHs.description)", systemImage: "text.alignleft")
 //                    .font(.subheadline)

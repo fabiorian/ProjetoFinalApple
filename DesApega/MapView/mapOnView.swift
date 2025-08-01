@@ -21,6 +21,7 @@ struct mapOnView: View {
                     donationHouse: donationHouses(),
                     DHonClick: { house in selectedHouse = house }
                 )
+                .ignoresSafeArea(edges: .top)
             }
             .tabItem {
                 Image(systemName: "map")
@@ -52,8 +53,8 @@ struct mapOnView: View {
                 Text("Sobre")
             }
         }
-        .accentColor(.saffron) // cor dos ícones da tab bar
-        .preferredColorScheme(.dark) // força modo escuro
+        .accentColor(.saffron) 
+        .preferredColorScheme(.dark)
         .sheet(item: $selectedHouse) { house in
             DHsOnClick(house: house)
                 .presentationDetents([.height(530)])

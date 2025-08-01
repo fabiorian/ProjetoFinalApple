@@ -59,6 +59,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let zoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 10000, maxCenterCoordinateDistance: 30000)
         mapView.setCameraZoomRange(zoomRange, animated: true)
 
+
+
         addAnnotations()
 
 //        currentLocation = CLLocationCoordinate2D(latitude: -3.7319, longitude: -38.5267)
@@ -149,6 +151,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         return MKOverlayRenderer(overlay: overlay)
     }
+    
+
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
@@ -161,7 +165,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             if let userLocation = currentLocation {
                 showRoute(to: annotation.coordinate)
             } else {
-                print("Localização do usuário ainda não carregada.")
+                print("Localização não disponível")
             }
         }
     }
@@ -169,19 +173,31 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            let identifier = "DonationHousePin"
+        // Evita customizar o ponto de localização do usuário
+        if annotation is MKUserLocation {
+            return nil
+        }
 
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            if annotationView == nil {
-                let pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                pinView.canShowCallout = true
-                pinView.markerTintColor = .systemGreen
-                annotationView = pinView
-            } else {
-                annotationView?.annotation = annotation
-            }
+        let identifier = "DonationHousePin"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
 
-            return annotationView
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+
+            // Cores personalizadas
+            annotationView?.markerTintColor = UIColor(named: "SaffronYellow") ?? UIColor.systemYellow // Amarelo do app
+            annotationView?.glyphTintColor = .black // Ícone ou texto preto
+            
+
+            // Botão de info opcional
+            let rightButton = UIButton(type: .detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = rightButton
+        } else {
+            annotationView?.annotation = annotation
+        }
+
+        return annotationView
     }
 }
 

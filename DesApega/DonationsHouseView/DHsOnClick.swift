@@ -48,7 +48,7 @@ struct DHsOnClick: View {
 
                     Label("Tipo: \(house.category.rawValue)", systemImage: iconForCategory(house.category))
                         .font(.subheadline)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.saffron)
 
                     Label("Descrição: \(house.description)", systemImage: "info.circle")
                         .font(.subheadline)
