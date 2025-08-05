@@ -22,7 +22,7 @@ struct HistoricView: View {
                             .frame(width: 100, height: 100)
                             .foregroundColor(.gray)
 
-                        Text("Nenhuma doação cadastrada")
+                        Text("Nenhuma doação encontrada")
                             .foregroundColor(.gray)
                             .font(.title3)
                     }
