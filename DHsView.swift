@@ -5,19 +5,19 @@ struct DHsView: View {
     @State private var endereco: String = ""
 
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack(alignment: .top, spacing: 16) {
             // Ícone da categoria
-//            Image(systemName: "house")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 40, height: 40)
-//                .padding(10)
-//                .background(Color.blue.opacity(0.1))
-//                .foregroundColor(.blue)
-//                .clipShape(Circle())
+            Image(systemName: "house")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .padding(10)
+                .background(Color.blue.opacity(0.1))
+                .foregroundColor(.blue)
+                .clipShape(Circle())
 
             // Conteúdo principal
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(DHs.name)
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -28,16 +28,16 @@ struct DHsView: View {
 
                 Label("Tipo: \(DHs.category.rawValue)", systemImage: iconForCategory(DHs.category))
                     .font(.subheadline)
-                    .foregroundColor(.saffron)
+                    .foregroundColor(.blue)
 
 //                Label("Descrição: \(DHs.description)", systemImage: "text.alignleft")
 //                    .font(.subheadline)
 //                    .foregroundStyle(.secondary)
             }
 
+//            Spacer()
         }
-
-//        .padding()
+        .padding()
 //        .background(
 //            RoundedRectangle(cornerRadius: 16)
 //                .fill(Color(.systemBackground))

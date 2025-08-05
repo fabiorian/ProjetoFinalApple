@@ -136,30 +136,16 @@ struct DesApegaView: View {
                 }
             }
             .padding()
-//            .onChange(of: imagemSelecionada) { item in
-//                Task {
-//                    if let data = try? await item?.loadTransferable(type: Data.self),
-//                       let uiImage = UIImage(data: data) {
-//                        self.imagem = uiImage
-//                    }
-//                }
-//            }
-            .toolbar{
-                ToolbarItem(placement: .cancellationAction){
-                    Button{
-                        dismiss()
-                    }label: {
-                        Image(systemName: "chevron.backward")
+            .onChange(of: imagemSelecionada) { item in
+                Task {
+                    if let data = try? await item?.loadTransferable(type: Data.self),
+                       let uiImage = UIImage(data: data) {
+                        self.imagem = uiImage
                     }
                 }
             }
         }
-        .accentColor(Color.saffron)
-        .preferredColorScheme(.dark)
-
-
         .navigationTitle(doacaoExistente == nil ? "Nova Doação" : "Editar Doação")
-        .navigationBarBackButtonHidden(true)
     }
     
     func salvarDoacao() {
@@ -231,4 +217,3 @@ struct DesApegaView: View {
 #Preview {
     DesApegaView()
 }
-

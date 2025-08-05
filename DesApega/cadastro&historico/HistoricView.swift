@@ -1,11 +1,3 @@
-//
-//  HistoricView.swift
-//  DesApega
-//
-//  Created by found on 27/07/25.
-//
-
-
 import SwiftUI
 import SwiftData
 
@@ -22,70 +14,108 @@ struct HistoricView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(donations, id: \.id) { donation in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(donation.name).font(.headline)
-                        Text("Categoria: \(donation.category.rawValue)")
-                        Text("Status: \(donation.status.rawValue)")
-                        Text("Doador: \(donation.doador)")
-                        Text("Local: \(donation.local)")
-                        Text("Data: \(donation.time, formatter: dateFormatter)")
-                            .font(.caption)
+                if donations.isEmpty {
+                    VStack(spacing: 12) {
+                        Image(systemName: "tray")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
                             .foregroundColor(.gray)
 
-                        if let data = donation.imageData,
-                           let image = UIImage(data: data) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 100)
-                                .cornerRadius(8)
-                                .onTapGesture {
-                                    imagemParaExibir = image
-                                    mostrarImagem = true
+                        Text("Nenhuma doação encontrada")
+                            .foregroundColor(.gray)
+                            .font(.title3)
+                    }
+                    .padding()
+                } else {
+                    List(donations, id: \.id) { donation in
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(donation.name)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+
+                                    Text("Categoria: \(donation.category.rawValue)")
+                                        .foregroundColor(.yellow)
+
+                                    Text("Status: \(donation.status.rawValue)")
+                                        .foregroundColor(.gray)
+                                        .font(.subheadline)
+
+                                    Text("Doador: \(donation.doador)")
+                                        .foregroundColor(.gray)
+                                        .font(.subheadline)
+
+                                    Text("Local: \(donation.local)")
+                                        .foregroundColor(.gray)
+                                        .font(.subheadline)
+
+                                    Text("Data: \(donation.time, formatter: dateFormatter)")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
                                 }
+
+                                Spacer()
+
+                                if let data = donation.imageData,
+                                   let image = UIImage(data: data) {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 80, height: 80)
+                                        .clipped()
+                                        .cornerRadius(10)
+                                        .onTapGesture {
+                                            imagemParaExibir = image
+                                            mostrarImagem = true
+                                        }
+                                }
+                            }
                         }
-                    }
-                    .padding(.vertical, 8)
-                    .contentShape(Rectangle()) // para tornar tudo clicável
-                    .onTapGesture {
-                        if doacaoSelecionada?.id == donation.id {
-                            doacaoSelecionada = nil // desmarcar se tocar de novo
-                        } else {
-                            doacaoSelecionada = donation
+                        .padding(.vertical, 8)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            doacaoSelecionada = doacaoSelecionada?.id == donation.id ? nil : donation
                         }
+                        .listRowBackground(doacaoSelecionada?.id == donation.id ? Color.yellow.opacity(0.15) : Color.clear)
                     }
-                    .background(doacaoSelecionada?.id == donation.id ? Color.blue.opacity(0.1) : Color.clear)
-                    .animation(.easeInOut, value: doacaoSelecionada?.id)
+                    .listStyle(.plain)
                 }
 
-                // Rodapé com os botões Editar e Excluir
                 if doacaoSelecionada != nil {
-                    VStack {
+                    VStack(spacing: 0) {
                         Divider()
+                            .background(.yellow)
                         HStack {
-                            Button("Editar") {
-                                mostrarEdicao = true
+                            Button(action: { mostrarEdicao = true }) {
+                                Label("Editar", systemImage: "pencil")
+                                    .foregroundColor(.yellow)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.black.opacity(0.2))
+                                    .cornerRadius(10)
                             }
-                            .foregroundColor(.blue)
-                            .padding()
-                            .frame(maxWidth: .infinity)
 
-                            Button("Excluir") {
-                                mostrarAlertaExcluir = true
+                            Button(action: { mostrarAlertaExcluir = true }) {
+                                Label("Excluir", systemImage: "trash")
+                                    .foregroundColor(.red)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.black.opacity(0.2))
+                                    .cornerRadius(10)
                             }
-                            .foregroundColor(.red)
-                            .padding()
-                            .frame(maxWidth: .infinity)
                         }
-                        .background(Color(.systemGroupedBackground))
+                        .padding(.horizontal)
+                        .padding(.top, 6)
                     }
                 }
             }
-            .navigationTitle("Histórico de Doações")
+            .padding(.top)
+            .background(Color.black.ignoresSafeArea())
+            .navigationTitle("Histórico")
+            .foregroundColor(.white)
         }
-
-        // Sheet de edição
         .sheet(isPresented: $mostrarEdicao) {
             if let doacao = doacaoSelecionada {
                 NavigationStack {
@@ -93,8 +123,6 @@ struct HistoricView: View {
                 }
             }
         }
-
-        // Sheet da imagem
         .sheet(isPresented: $mostrarImagem) {
             if let imagem = imagemParaExibir {
                 ZStack {
@@ -108,8 +136,6 @@ struct HistoricView: View {
                 }
             }
         }
-
-        // Alerta de exclusão
         .alert("Confirmar Exclusão", isPresented: $mostrarAlertaExcluir) {
             Button("Cancelar", role: .cancel) {}
             Button("Excluir", role: .destructive) {
@@ -131,7 +157,6 @@ private let dateFormatter: DateFormatter = {
     formatter.timeStyle = .short
     return formatter
 }()
-
 #Preview {
    HistoricView()
 }

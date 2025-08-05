@@ -157,7 +157,7 @@ func donationHouses() -> [DonationsHouse] {
         description: "Recebemos eletrônicos, no geral.",
         latitude: -3.750000,
         longitude: -38.540000, // Exemplo de coordenada em Fortaleza
-        imageName: "Esperanca"
+        imageName: "Image"
     )
 
     let house5 = DonationsHouse(
@@ -171,4 +171,3 @@ func donationHouses() -> [DonationsHouse] {
 
     return [house1, house2, house3, house4, house5]
 }
-
