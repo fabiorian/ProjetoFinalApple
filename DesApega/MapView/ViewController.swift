@@ -63,7 +63,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
         addAnnotations()
 
-//        currentLocation = CLLocationCoordinate2D(latitude: -3.7319, longitude: -38.5267)
+        currentLocation = CLLocationCoordinate2D(latitude: -3.8319, longitude: -38.5267)
 
     }
     func  showRoute(to destinationCoordinate: CLLocationCoordinate2D){

@@ -41,10 +41,10 @@ struct DHsOnClick: View {
                     Text(house.name)
                         .font(.title2)
                         .fontWeight(.semibold)
-
+                        .foregroundStyle(.white)
                     Label("Endereço: \(endereco)", systemImage: "mappin.and.ellipse")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.gray) 
 
                     Label("Tipo: \(house.category.rawValue)", systemImage: iconForCategory(house.category))
                         .font(.subheadline)
@@ -52,7 +52,7 @@ struct DHsOnClick: View {
 
                     Label("Descrição: \(house.description)", systemImage: "info.circle")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.gray)
 
                     HStack {
                         Spacer()
@@ -68,7 +68,19 @@ struct DHsOnClick: View {
                                 .foregroundColor(.black)
                                 .cornerRadius(10)
                         }
+                        NavigationLink(destination: DesApegaView()){
+
+                            Label("Adicionar Doacão", systemImage: "plus")
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        .background(Color.black)
                         Spacer()
+                        
+
                     }
                     .padding(.top, 8)
                 }
@@ -77,6 +89,7 @@ struct DHsOnClick: View {
 
                 Spacer()
             }
+
             .toolbar{
                 ToolbarItem(placement: .cancellationAction){
                     Button{
@@ -93,7 +106,8 @@ struct DHsOnClick: View {
                 }
             }
             .padding(.bottom, 200)
-
+            .background(Color.black)
+            .accentColor(.saffron)
             .frame(maxWidth: .greatestFiniteMagnitude)
             
         }.navigationBarBackButtonHidden(true)

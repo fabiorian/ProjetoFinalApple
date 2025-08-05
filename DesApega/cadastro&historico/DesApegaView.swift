@@ -144,8 +144,22 @@ struct DesApegaView: View {
 //                    }
 //                }
 //            }
+            .toolbar{
+                ToolbarItem(placement: .cancellationAction){
+                    Button{
+                        dismiss()
+                    }label: {
+                        Image(systemName: "chevron.backward")
+                    }
+                }
+            }
         }
+        .accentColor(Color.saffron)
+        .preferredColorScheme(.dark)
+
+
         .navigationTitle(doacaoExistente == nil ? "Nova Doação" : "Editar Doação")
+        .navigationBarBackButtonHidden(true)
     }
     
     func salvarDoacao() {

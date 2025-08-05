@@ -23,31 +23,32 @@ struct mapOnView: View {
                 )
                 .ignoresSafeArea(edges: .top)
             }
+            .tag(0)
             .tabItem {
                 Image(systemName: "map")
                 Text("Mapa")
             }
 
+
             HistoricView()
                 .background(Color.black)
+                .tag(1)
                 .tabItem {
                     Image(systemName: "clock")
                     Text("Histórico")
                 }
-
             ListDHsView()
+
                 .background(Color.black)
+                .tag(2)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Casas de Doações")
                 }
-
-            VStack {
-                Text("Sobre o app")
-                    .foregroundColor(.saffron)
-            }
+            onBoardingView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black)
+            .tag(3)
             .tabItem {
                 Image(systemName: "questionmark.circle")
                 Text("Sobre")
